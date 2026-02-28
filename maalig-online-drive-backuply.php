@@ -20,6 +20,6 @@ if (!defined('ABSPATH')) exit;
 
 define('MAALIGODBL_PATH', plugin_dir_path(__FILE__));
 define('MAALIGODBL_URL', plugin_dir_url(__FILE__));
+define('MAALIGODBL_BACKUP_DIR', WP_CONTENT_DIR . '/maalig-backups/');
 
-//require_once MAALIGODBL_PATH . 'vendor/autoload.php';
 require_once MAALIGODBL_PATH . 'core/init.php';

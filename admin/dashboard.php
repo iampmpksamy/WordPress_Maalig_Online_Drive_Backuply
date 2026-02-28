@@ -1,7 +1,7 @@
 <?php
 if (!defined('ABSPATH')) exit;
 
-add_action('admin_menu', function() {
+add_action('admin_menu',function(){
 
     add_menu_page(
         'Maalig Backup',
@@ -22,39 +22,39 @@ add_action('admin_menu', function() {
     );
 });
 
-function maaligodbl_dashboard_page() {
-
-    $files = file_exists(MAALIGODBL_BACKUP_DIR)
-        ? scandir(MAALIGODBL_BACKUP_DIR)
-        : [];
+function maaligodbl_dashboard_page(){
 ?>
 <div class="wrap">
 <h1>Maalig Backup Dashboard</h1>
 
-<form method="post">
-<button type="submit" name="run_backup"
-class="button button-primary">Run Backup Now</button>
-</form>
+<button id="startBackup" class="button button-primary">Run Backup Now</button>
 
-<?php
-if (isset($_POST['run_backup'])) {
-    maaligodbl_run_backup();
-    echo "<p><strong>Backup started.</strong></p>";
-}
-?>
+<div style="margin-top:20px;background:#eee;width:400px;height:20px;">
+    <div id="progressBar" style="background:#4caf50;width:0%;height:100%;"></div>
+</div>
 
-<h2>Available Backups</h2>
-<ul>
-<?php
-foreach ($files as $file) {
-    if (strpos($file, '.zip') !== false) {
-        echo "<li><a href='" .
-        content_url('maalig-backups/' . $file) .
-        "' download>$file</a></li>";
+<script>
+jQuery(function($){
+
+    $('#startBackup').click(function(){
+        $.post(ajaxurl,{action:'maaligodbl_start_backup'},function(){
+            checkProgress();
+        });
+    });
+
+    function checkProgress(){
+        $.post(ajaxurl,{action:'maaligodbl_progress'},function(res){
+            var p = res.data;
+            $('#progressBar').css('width',p+'%');
+            if(p<100){
+                setTimeout(checkProgress,1000);
+            } else {
+                location.reload();
+            }
+        });
     }
-}
-?>
-</ul>
+});
+</script>
 
 </div>
 <?php }
