@@ -1,0 +1,7 @@
+/vendor/** export-ignore
+/.github/** export-ignore
+/.gitignore export-ignore
+/vendor/google/apiclient-services/tests export-ignore
+composer.json export-ignore
+composer.lock export-ignore
+Developer.code-workspace export-ignore
