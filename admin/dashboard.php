@@ -1,7 +1,7 @@
 <?php
 if (!defined('ABSPATH')) exit;
 
-add_action('admin_menu',function(){
+add_action('admin_menu', function(){
 
     add_menu_page(
         'Maalig Backup',
@@ -23,7 +23,10 @@ add_action('admin_menu',function(){
 });
 
 function maaligodbl_dashboard_page(){
+
+    $files = glob(MAALIGODBL_BACKUP_DIR . '*.zip');
 ?>
+
 <div class="wrap">
 <h1>Maalig Backup Dashboard</h1>
 
@@ -37,24 +40,44 @@ function maaligodbl_dashboard_page(){
 jQuery(function($){
 
     $('#startBackup').click(function(){
+
         $.post(ajaxurl,{action:'maaligodbl_start_backup'},function(){
             checkProgress();
         });
+
     });
 
     function checkProgress(){
         $.post(ajaxurl,{action:'maaligodbl_progress'},function(res){
             var p = res.data;
             $('#progressBar').css('width',p+'%');
-            if(p<100){
+
+            if(p < 100){
                 setTimeout(checkProgress,1000);
             } else {
                 location.reload();
             }
         });
     }
+
 });
 </script>
 
+<hr>
+
+<h2>Available Backups</h2>
+
+<?php
+if ($files) {
+    foreach ($files as $file) {
+        $name = basename($file);
+        echo "<p><a href='".content_url('maalig-backups/'.$name)."' download>$name</a></p>";
+    }
+} else {
+    echo "<p>No backups found.</p>";
+}
+?>
+
 </div>
+
 <?php }

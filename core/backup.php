@@ -3,50 +3,53 @@ if (!defined('ABSPATH')) exit;
 
 function maaligodbl_run_backup(){
 
-    update_option('maaligodbl_progress',0);
+    update_option('maaligodbl_progress', 5);
 
-    if(!file_exists(MAALIGODBL_BACKUP_DIR)){
+    if (!file_exists(MAALIGODBL_BACKUP_DIR)) {
         wp_mkdir_p(MAALIGODBL_BACKUP_DIR);
     }
 
     $timestamp = date('Y-m-d_H-i-s');
-    $zip_file = MAALIGODBL_BACKUP_DIR."backup_$timestamp.zip";
+    $zip_file  = MAALIGODBL_BACKUP_DIR . "backup_$timestamp.zip";
 
-    update_option('maaligodbl_progress',20);
+    update_option('maaligodbl_progress', 20);
 
     $result = maaligodbl_create_full_backup($zip_file);
 
-    update_option('maaligodbl_progress',60);
+    update_option('maaligodbl_progress', 60);
 
-    if($result){
+    if ($result) {
 
-        if(get_option('maaligodbl_enable_gdrive')){
+        maaliagodbl_add_log("Local backup created: $zip_file");
+
+        if (get_option('maaligodbl_enable_gdrive')) {
             maaligodbl_upload_to_gdrive($zip_file);
         }
 
-        update_option('maaligodbl_progress',90);
+        update_option('maaligodbl_progress', 90);
 
         maaligodbl_rotate_backups();
 
-        update_option('maaligodbl_progress',100);
-
-        maaliagodbl_add_log("Backup completed: $zip_file");
+        update_option('maaligodbl_progress', 100);
 
         return true;
     }
+
+    maaliagodbl_add_log("Backup failed.");
+    update_option('maaligodbl_progress', 0);
 
     return false;
 }
 
 function maaligodbl_rotate_backups(){
 
-    $files = glob(MAALIGODBL_BACKUP_DIR.'*.zip');
+    $files = glob(MAALIGODBL_BACKUP_DIR . '*.zip');
     rsort($files);
 
     $keep = 5;
 
-    if(count($files) > $keep){
-        for($i=$keep;$i<count($files);$i++){
+    if (count($files) > $keep) {
+        for ($i = $keep; $i < count($files); $i++) {
             unlink($files[$i]);
         }
     }

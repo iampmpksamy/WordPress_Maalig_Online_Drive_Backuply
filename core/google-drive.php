@@ -1,78 +1,53 @@
-<?php
-if (!defined('ABSPATH')) exit;
-
-function maaligodbl_get_redirect_uri(){
-    return admin_url('admin.php?page=maaligodbl-settings');
-}
-
-function maaligodbl_get_auth_url(){
-
-    return "https://accounts.google.com/o/oauth2/v2/auth?".
-        http_build_query([
-            'client_id'=>get_option('maaligodbl_client_id'),
-            'redirect_uri'=>maaligodbl_get_redirect_uri(),
-            'response_type'=>'code',
-            'scope'=>'https://www.googleapis.com/auth/drive',
-            'access_type'=>'offline',
-            'prompt'=>'consent'
-        ]);
-}
-
-add_action('admin_init','maaligodbl_handle_oauth');
-
-function maaligodbl_handle_oauth(){
-
-    if(!isset($_GET['code'])) return;
-
-    $res = wp_remote_post('https://oauth2.googleapis.com/token',[
-        'body'=>[
-            'code'=>$_GET['code'],
-            'client_id'=>get_option('maaligodbl_client_id'),
-            'client_secret'=>get_option('maaligodbl_client_secret'),
-            'redirect_uri'=>maaligodbl_get_redirect_uri(),
-            'grant_type'=>'authorization_code'
-        ]
-    ]);
-
-    $body = json_decode(wp_remote_retrieve_body($res),true);
-
-    if(isset($body['access_token'])){
-        update_option('maaligodbl_gdrive_token',$body);
-    }
-}
-
 function maaligodbl_upload_to_gdrive($file_path){
 
     $token = get_option('maaligodbl_gdrive_token');
-    if(!$token) return;
+
+    if (!$token || empty($token['access_token'])) {
+        maaliagodbl_add_log("Drive Upload skipped: No token.");
+        return;
+    }
 
     $access = $token['access_token'];
 
-    $folder = maaligodbl_get_or_create_folder($access);
+    $file_name = basename($file_path);
 
-    $name = basename($file_path);
+    $metadata = json_encode([
+        'name' => $file_name
+    ]);
 
-    wp_remote_post(
-        'https://www.googleapis.com/upload/drive/v3/files?uploadType=media',
+    $boundary = wp_generate_password(24,false);
+
+    $body  = "--$boundary\r\n";
+    $body .= "Content-Type: application/json; charset=UTF-8\r\n\r\n";
+    $body .= $metadata . "\r\n";
+    $body .= "--$boundary\r\n";
+    $body .= "Content-Type: application/zip\r\n\r\n";
+    $body .= file_get_contents($file_path) . "\r\n";
+    $body .= "--$boundary--";
+
+    $response = wp_remote_post(
+        'https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart',
         [
-            'headers'=>[
-                'Authorization'=>'Bearer '.$access,
-                'Content-Type'=>'application/zip'
+            'headers' => [
+                'Authorization' => 'Bearer ' . $access,
+                'Content-Type'  => 'multipart/related; boundary=' . $boundary
             ],
-            'body'=>file_get_contents($file_path)
+            'body'    => $body,
+            'timeout' => 120
         ]
     );
-}
 
-function maaligodbl_get_drive_quota(){
+    if (is_wp_error($response)) {
+        maaliagodbl_add_log("Drive Upload Error: ".$response->get_error_message());
+        return;
+    }
 
-    $token = get_option('maaligodbl_gdrive_token');
-    if(!$token) return false;
+    $code = wp_remote_retrieve_response_code($response);
 
-    $res = wp_remote_get(
-        'https://www.googleapis.com/drive/v3/about?fields=storageQuota',
-        ['headers'=>['Authorization'=>'Bearer '.$token['access_token']]]
-    );
-
-    return json_decode(wp_remote_retrieve_body($res),true);
+    if ($code != 200) {
+        maaliagodbl_add_log("Drive Upload Failed (Code $code):");
+        maaliagodbl_add_log(wp_remote_retrieve_body($response));
+    } else {
+        maaliagodbl_add_log("Drive Upload Success: $file_name");
+    }
 }
