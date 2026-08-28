@@ -80,7 +80,7 @@ Yes. It is built for performance and minimal overhead.
 = 1.0.0 =
 * Initial release
 * Local Backup Support (Files + Database)
-* Google Drive Backup Integration
+* Google Drive settings interface included, but upload is not complete in this release
 * Admin Dashboard Interface
 * Settings Configuration Panel
 * Manual Backup Trigger
@@ -90,4 +90,4 @@ Yes. It is built for performance and minimal overhead.
 == Upgrade Notice ==
 
 = 1.0.0 =
-Initial stable release of Online Drive Backuply with Local and Google Drive backup support.
+Experimental local archive release for staging evaluation; cloud upload and restore are incomplete.
