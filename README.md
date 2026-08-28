@@ -1,150 +1,54 @@
-#🚀 Online-Drive-Backuply
+# Maalig Online Drive Backuply
 
-Online-Drive-Backuply is a lightweight, powerful WordPress backup solution designed for modern creators, developers, and businesses who want full control over their data.
+Maalig Online Drive Backuply `1.0.0` is an experimental WordPress utility for building local full-site archives with a database export.
 
-It provides seamless Local Backup and Google Drive Backup capabilities with an intuitive dashboard experience — making data protection simple, reliable, and efficient.
+## Current status
 
+This repository is published for evaluation and continued development. The audited source creates local ZIP archives, adds a SQL database dump, reports manual progress in WordPress Admin, and retains the five newest archives.
 
-#🌍 Overview
+The Google Drive upload and restore paths are not complete production workflows in this release. Do not rely on them for disaster recovery.
 
-Online-Drive-Backuply helps you:
-Secure your WordPress site data
-Store backups locally on your server
-Sync backups to Google Drive
-Manage restore points easily
-Monitor backup history from a clean dashboard
-Built for performance and simplicity — no unnecessary complexity.
+## Requirements
 
-#✨ Key Features
-#🔹 Local Backup
+- WordPress 6.0 or later
+- PHP 8.0 or later
+- PHP Zip extension
+- Sufficient local disk space for a complete site archive
+- Administrator and filesystem access
 
-One-click full site backup
-Database + files backup
-Organized storage structure
-Instant restore support
-Backup history tracking
+## Installation
 
+Download the latest release ZIP and upload it from **WordPress Admin → Plugins → Add New Plugin → Upload Plugin**. Evaluate it on staging before considering production use.
 
-#🔹 Google Drive Backup
+See the complete [installation and validation guide](docs/INSTALLATION.md) or the [project wiki](https://github.com/iampmpksamy/maalig-online-drive-backuply/wiki).
 
-Secure cloud backup integration
-Manual & scheduled backup support
-Automatic upload to Drive
-Backup file organization in Drive
-Safe cloud restore workflow
+## Verified capabilities
 
+- Manual full-site ZIP creation
+- SQL database export inside the archive
+- WordPress Admin backup trigger and progress display
+- Local archive listing
+- Five-archive local retention
+- Backup activity logging
 
-#🔹 Smart Dashboard
+## Known limitations
 
-Clean and modern admin UI
-Backup status overview
-Storage usage monitoring
-Activity logs
-Easy settings management
+- Google Drive upload is incomplete.
+- Restore code is not a validated recovery workflow.
+- Large sites may exceed PHP execution time, memory, or disk limits.
+- Local archives reside under `wp-content/maalig-backups/`; review web-server access controls before testing.
 
+## Support
 
-#🎯 Who Is It For?
+- [Plugins Hub page](https://pluginshub.pmpksamy.com/wordpress/maalig-online-drive-backuply/)
+- [Documentation wiki](https://github.com/iampmpksamy/maalig-online-drive-backuply/wiki)
+- [Bug reports and feature requests](https://github.com/iampmpksamy/maalig-online-drive-backuply/issues)
+- [Support policy](docs/SUPPORT.md)
 
-WordPress developers
-Agencies managing multiple sites
-Business owners
-Bloggers & content creators
-Home lab hosting users
-SaaS builders
+## Author
 
-If uptime and data ownership matter to you — this is built for you.
+[IAMPMPKSAMY](https://pmpksamy.com/)
 
+## License
 
-#🛡 Why Online-Drive-Backuply?
-
-✔ No bloated features
-✔ Fast execution
-✔ Minimal resource usage
-✔ Simple configuration
-✔ Designed for reliability
-✔ Cloud-ready architecture
-
-It focuses on what actually matters:
-Safe backups. Easy recovery. Zero drama.
-
-
-#⚙️ Requirements
-
-WordPress (latest stable version recommended)
-PHP 7.4+
-Proper file permissions
-Google Account (for Drive backup)
-
-
-#📦 Installation
-
-Upload the plugin to your WordPress /wp-content/plugins/ directory
-Activate the plugin from WordPress Admin
-Configure backup settings
-Start your first backup
-
-
-#🔄 Backup Workflow
-
-Choose backup type (Local / Google Drive)
-Initiate backup
-Monitor progress
-Download or restore when needed
-
-
-#🔐 Security
-
-Online-Drive-Backuply follows WordPress security best practices:
-Secure admin access
-Safe file handling
-Protected backup directories
-Controlled restore process
-
-
-#📊 Performance Optimized
-
-Designed to:
-Minimize server load
-Prevent timeout issues
-Handle large backups efficiently
-Maintain stability during execution
-
-
-#🗺 Roadmap
-
-Future enhancements may include:
-Multi-cloud support
-Incremental backups
-Remote server backup
-Email notifications
-Backup integrity verification
-Advanced scheduling controls
-Dashboard analytics
-
-
-#🧠 Vision
-
-Online-Drive-Backuply is built with a simple philosophy:
-Own your data.
-Protect your infrastructure.
-Scale without fear.
-
-
-#🤝 Contributing
-
-We welcome suggestions, improvements, and feature requests.
-If you want to enhance the plugin:
-Fork the repository
-Create a feature branch
-Submit a pull request
-
-
-#📄 License
-
-This project is released under the GPL license.
-
-
-#❤️ Built For Builders
-
-Whether you're running a home lab server, hosting multiple client sites, or building a SaaS product —
-Online-Drive-Backuply ensures your data stays protected.
+Licensed under `GPL-2.0-or-later`. See [LICENSE](LICENSE).

@@ -8,22 +8,22 @@ Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Lightweight WordPress backup plugin supporting Local Storage and Google Drive Backup with a clean dashboard interface.
+Experimental WordPress local archive builder with database export, progress tracking, and retained backup history.
 
 == Description ==
 
-Online Drive Backuply (ODBL) is a lightweight and performance-focused WordPress backup plugin designed for secure Local and Google Drive backups.
+Maalig Online Drive Backuply 1.0.0 is an experimental WordPress backup utility for creating local site archives during development and staging validation.
 
-This minimal version (V1.0.0) includes essential backup functionality for:
+The current source implements:
 
 • Full site backup (Files + Database)
 • Manual backup generation
 • Local server storage
-• Google Drive cloud backup integration
+• Retention of the five newest local archives
 
 The plugin is built using clean OOP architecture and does not collect or transmit any user data to external tracking systems.
 
-This version focuses only on Local Backup and Google Drive Backup for stability and performance.
+The Google Drive settings and restore classes are not a complete production workflow in this release. Test archives and recovery procedures on a non-production site before relying on the plugin.
 
 == Features ==
 
@@ -31,7 +31,6 @@ This version focuses only on Local Backup and Google Drive Backup for stability 
 * Full Database Backup (SQL Export)
 * One-click Manual Backup
 * Local Backup Storage (Server)
-* Google Drive Backup Integration
 * Backup Logs Tracking
 * Secure Admin Dashboard (dashboard.php)
 * Settings Management Panel (settings.php)
@@ -39,15 +38,15 @@ This version focuses only on Local Backup and Google Drive Backup for stability 
 * No Third-party Tracking Scripts
 * Clean OOP Structure
 
-This plugin only connects to Google Drive API when configured by the administrator.
+Do not treat an archive as verified until it has been downloaded, inspected, and restored successfully in an isolated environment.
 
 == Installation ==
 
-1. Upload the plugin files to the `/wp-content/plugins/online-drive-backuply` directory.
-2. Activate the plugin through the 'Plugins' screen in WordPress.
-3. Go to the "Online Drive Backuply" menu in admin dashboard.
-4. Configure Local path and Google Drive API settings.
-5. Start creating backups.
+1. Download the source ZIP from the latest GitHub release.
+2. Upload the plugin files to the `/wp-content/plugins/maalig-online-drive-backuply` directory.
+3. Activate the plugin through the **Plugins** screen in WordPress.
+4. Open **Maalig Backup** in the admin dashboard.
+5. Run a backup on a staging site and validate the resulting ZIP before production evaluation.
 
 == Frequently Asked Questions ==
 
@@ -55,13 +54,19 @@ This plugin only connects to Google Drive API when configured by the administrat
 No. The plugin does not collect, store, or transmit user data.
 
 = Does it require Google Drive? =
-No. Google Drive integration is optional. You can use Local Backup only.
+No. The verified capability in this release is local archive creation. The Google Drive flow is incomplete and should not be relied on.
 
 = Does it support automatic scheduled backups? =
-Not in V1.0.0. This version supports manual backup only.
+Scheduler code exists, but the current release has not been validated as a production scheduling system. Use the manual flow during evaluation.
 
 = Is it lightweight? =
 Yes. It is built for performance and minimal overhead.
+
+== Support ==
+
+* Plugin page: https://pluginshub.pmpksamy.com/wordpress/maalig-online-drive-backuply/
+* Documentation and installation guide: https://github.com/iampmpksamy/maalig-online-drive-backuply/wiki
+* Bug reports and feature requests: https://github.com/iampmpksamy/maalig-online-drive-backuply/issues
 
 == Screenshots ==
 
@@ -80,6 +85,7 @@ Yes. It is built for performance and minimal overhead.
 * Settings Configuration Panel
 * Manual Backup Trigger
 * Backup Logs System
+* Public metadata, limitations, installation guidance, and support URLs synchronized with the source audit
 
 == Upgrade Notice ==
 
