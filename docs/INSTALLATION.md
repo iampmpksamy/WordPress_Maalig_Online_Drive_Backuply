@@ -27,7 +27,7 @@ Use a staging clone, keep an independent backup, and confirm adequate free disk 
 
 ```bash
 cd /path/to/wordpress/wp-content/plugins
-git clone https://github.com/iampmpksamy/maalig-online-drive-backuply.git
+git clone https://github.com/iampmpksamy/WordPress_Maalig_Online_Drive_Backuply.git
 cd /path/to/wordpress
 wp plugin activate maalig-online-drive-backuply
 ```

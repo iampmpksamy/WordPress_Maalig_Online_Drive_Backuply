@@ -9,7 +9,7 @@
  * Requires PHP: 8.0
  * Author: IAMPMPKSAMY
  * Author URI: https://pmpksamy.com/
- * Support URI: https://github.com/iampmpksamy/maalig-online-drive-backuply/issues
+ * Support URI: https://github.com/iampmpksamy/WordPress_Maalig_Online_Drive_Backuply/issues
  * License: GPLv2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: online-drive-backuply

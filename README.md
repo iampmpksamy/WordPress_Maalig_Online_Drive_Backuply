@@ -20,7 +20,7 @@ The Google Drive upload and restore paths are not complete production workflows 
 
 Download the latest release ZIP and upload it from **WordPress Admin → Plugins → Add New Plugin → Upload Plugin**. Evaluate it on staging before considering production use.
 
-See the complete [installation and validation guide](docs/INSTALLATION.md) or the [project wiki](https://github.com/iampmpksamy/maalig-online-drive-backuply/wiki).
+See the complete [installation and validation guide](docs/INSTALLATION.md) or the [project wiki](https://github.com/iampmpksamy/WordPress_Maalig_Online_Drive_Backuply/wiki).
 
 ## Verified capabilities
 
@@ -41,8 +41,8 @@ See the complete [installation and validation guide](docs/INSTALLATION.md) or th
 ## Support
 
 - [Plugins Hub page](https://pluginshub.pmpksamy.com/wordpress/maalig-online-drive-backuply/)
-- [Documentation wiki](https://github.com/iampmpksamy/maalig-online-drive-backuply/wiki)
-- [Bug reports and feature requests](https://github.com/iampmpksamy/maalig-online-drive-backuply/issues)
+- [Documentation wiki](https://github.com/iampmpksamy/WordPress_Maalig_Online_Drive_Backuply/wiki)
+- [Bug reports and feature requests](https://github.com/iampmpksamy/WordPress_Maalig_Online_Drive_Backuply/issues)
 - [Support policy](docs/SUPPORT.md)
 
 ## Author

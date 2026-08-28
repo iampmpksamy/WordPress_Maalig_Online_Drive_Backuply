@@ -65,8 +65,8 @@ Yes. It is built for performance and minimal overhead.
 == Support ==
 
 * Plugin page: https://pluginshub.pmpksamy.com/wordpress/maalig-online-drive-backuply/
-* Documentation and installation guide: https://github.com/iampmpksamy/maalig-online-drive-backuply/wiki
-* Bug reports and feature requests: https://github.com/iampmpksamy/maalig-online-drive-backuply/issues
+* Documentation and installation guide: https://github.com/iampmpksamy/WordPress_Maalig_Online_Drive_Backuply/wiki
+* Bug reports and feature requests: https://github.com/iampmpksamy/WordPress_Maalig_Online_Drive_Backuply/issues
 
 == Screenshots ==
 

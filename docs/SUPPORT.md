@@ -1,6 +1,6 @@
 # Support
 
-Use [GitHub Issues](https://github.com/iampmpksamy/maalig-online-drive-backuply/issues) for reproducible bugs and development requests.
+Use [GitHub Issues](https://github.com/iampmpksamy/WordPress_Maalig_Online_Drive_Backuply/issues) for reproducible bugs and development requests.
 
 Include:
 
